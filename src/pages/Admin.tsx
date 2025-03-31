@@ -71,12 +71,13 @@ const Admin: React.FC = () => {
       
       if (user) {
         try {
+          // Fix: Using maybeSingle() instead of single() to avoid 406 error
+          // Also, simplify the query to just check if any role=admin records exist
           const { data, error } = await supabase
             .from('user_roles')
-            .select('role')
+            .select('*')
             .eq('user_id', user.id)
-            .eq('role', 'admin')
-            .single();
+            .eq('role', 'admin');
           
           if (error) {
             console.error('Error checking admin role:', error);
@@ -85,8 +86,9 @@ const Admin: React.FC = () => {
             return;
           }
           
-          setIsAdmin(!!data);
-          if (!data) {
+          // Check if any admin role entries exist for this user
+          setIsAdmin(data && data.length > 0);
+          if (!data || data.length === 0) {
             navigate('/'); // Redirect non-admins
             toast({
               title: "Access Denied",
