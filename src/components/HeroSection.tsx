@@ -32,7 +32,7 @@ const HeroSection: React.FC = () => {
           <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden ghibli-shadow">
             <div className="absolute inset-0 bg-gradient-to-r from-ghibli-forest/20 to-transparent z-10"></div>
             <img 
-              src="https://i.imgur.com/s8KUQfP.jpg" 
+              src="https://lh3.googleusercontent.com/p/AF1QipMhqWYem3UbV5k6CgDOM1nLBHKkjVOg9xRPEFzd=s1360-w1360-h1020" 
               alt="Ghibli-inspired pizza with magical toppings" 
               className="w-full h-full object-cover object-center"
             />
