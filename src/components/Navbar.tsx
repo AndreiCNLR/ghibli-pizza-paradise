@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import AuthNavItems from './AuthNavItems';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,18 +22,6 @@ const Navbar: React.FC = () => {
           <span className="text-xl font-bold text-ghibli-forest">Ghibli Pizza</span>
         </Link>
         
-        {/* Mobile menu button */}
-        <button 
-          className="md:hidden focus:outline-none" 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6 text-ghibli-forest" />
-          ) : (
-            <Menu className="h-6 w-6 text-ghibli-forest" />
-          )}
-        </button>
-
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
           <Link 
@@ -58,6 +47,23 @@ const Navbar: React.FC = () => {
             Order Now
           </Link>
         </div>
+
+        {/* Auth Navigation */}
+        <div className="hidden md:flex">
+          <AuthNavItems />
+        </div>
+        
+        {/* Mobile menu button */}
+        <button 
+          className="md:hidden focus:outline-none" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <X className="h-6 w-6 text-ghibli-forest" />
+          ) : (
+            <Menu className="h-6 w-6 text-ghibli-forest" />
+          )}
+        </button>
       </div>
 
       {/* Mobile menu */}
@@ -89,6 +95,9 @@ const Navbar: React.FC = () => {
             >
               Order Now
             </Link>
+            <div className="py-2">
+              <AuthNavItems />
+            </div>
           </div>
         </div>
       )}

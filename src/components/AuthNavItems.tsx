@@ -18,8 +18,8 @@ const AuthNavItems: React.FC = () => {
   if (!user) {
     return (
       <Link to="/auth">
-        <Button variant="ghost" className="text-white hover:text-white hover:bg-white/20">
-          Login
+        <Button variant="ghost" className="text-ghibli-forest hover:text-ghibli-brown hover:bg-transparent">
+          Login / Sign Up
         </Button>
       </Link>
     );
@@ -28,12 +28,12 @@ const AuthNavItems: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="text-white hover:text-white hover:bg-white/20">
+        <Button variant="ghost" className="text-ghibli-forest hover:text-ghibli-brown hover:bg-transparent">
           <User className="h-5 w-5 mr-2" />
           {profile?.name ? profile.name.split(' ')[0] : 'Account'}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="z-50">
         <DropdownMenuItem asChild>
           <Link to="/profile" className="cursor-pointer">Profile</Link>
         </DropdownMenuItem>
