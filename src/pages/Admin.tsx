@@ -77,7 +77,8 @@ const Admin: React.FC = () => {
             .from('user_roles')
             .select('*')
             .eq('user_id', user.id)
-            .eq('role', 'admin');
+
+            //Don't use eq for role. just test it after you receive the data
           
           if (error) {
             console.error('Error checking admin role:', error);
