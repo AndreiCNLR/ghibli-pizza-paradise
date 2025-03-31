@@ -7,38 +7,14 @@ import AboutSection from '@/components/AboutSection';
 import PizzaCard from '@/components/PizzaCard';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-
-const featuredPizzas = [
-  {
-    id: 1,
-    name: "Totoro's Forest Feast",
-    description: "Wild mushrooms, spinach, caramelized onions, and truffle oil on our signature herb crust.",
-    price: 16.99,
-    image: "https://i.imgur.com/FqSkpLU.jpg",
-    rating: 4.8,
-    isNew: true,
-    isVegetarian: true
-  },
-  {
-    id: 2,
-    name: "Howl's Moving Castle",
-    description: "Spicy chorizo, roasted red peppers, mozzarella, and smoked gouda with a drizzle of garlic aioli.",
-    price: 18.99,
-    image: "https://i.imgur.com/TT4hqsY.jpg",
-    rating: 4.9
-  },
-  {
-    id: 3,
-    name: "Spirited Margherita",
-    description: "Fresh buffalo mozzarella, basil, cherry tomatoes, and extra virgin olive oil on a thin, crispy crust.",
-    price: 15.99,
-    image: "https://i.imgur.com/6YLHVBs.jpg",
-    rating: 4.7,
-    isVegetarian: true
-  }
-];
+import { usePizzas } from '@/hooks/use-pizzas';
 
 const Index: React.FC = () => {
+  const { data: allPizzas = [], isLoading } = usePizzas();
+  
+  // Get the first 3 pizzas for the featured section
+  const featuredPizzas = allPizzas.slice(0, 3);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -55,11 +31,32 @@ const Index: React.FC = () => {
               </Link>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredPizzas.map(pizza => (
-                <PizzaCard key={pizza.id} {...pizza} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="text-center py-10">
+                <p className="text-ghibli-slate">Loading pizzas...</p>
+              </div>
+            ) : featuredPizzas.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredPizzas.map(pizza => (
+                  <PizzaCard 
+                    key={pizza.id}
+                    id={Number(pizza.id)}
+                    name={pizza.name}
+                    description={pizza.description || ''}
+                    price={pizza.price}
+                    image={pizza.image_url || 'https://i.imgur.com/sCRmHqz.jpg'} // Default image
+                    // These properties aren't in our database yet
+                    rating={0}
+                    isNew={false}
+                    isVegetarian={false}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-10">
+                <p className="text-ghibli-slate">No pizzas found. Add some in the admin panel!</p>
+              </div>
+            )}
           </div>
         </section>
         

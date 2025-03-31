@@ -1,121 +1,35 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PizzaCard from '@/components/PizzaCard';
-import { Search, Filter } from 'lucide-react';
-
-// Pizza data
-const allPizzas = [
-  {
-    id: 1,
-    name: "Totoro's Forest Feast",
-    description: "Wild mushrooms, spinach, caramelized onions, and truffle oil on our signature herb crust.",
-    price: 16.99,
-    image: "https://i.imgur.com/FqSkpLU.jpg",
-    rating: 4.8,
-    isNew: true,
-    isVegetarian: true,
-    category: "signature"
-  },
-  {
-    id: 2,
-    name: "Howl's Moving Castle",
-    description: "Spicy chorizo, roasted red peppers, mozzarella, and smoked gouda with a drizzle of garlic aioli.",
-    price: 18.99,
-    image: "https://i.imgur.com/TT4hqsY.jpg",
-    rating: 4.9,
-    category: "signature"
-  },
-  {
-    id: 3,
-    name: "Spirited Margherita",
-    description: "Fresh buffalo mozzarella, basil, cherry tomatoes, and extra virgin olive oil on a thin, crispy crust.",
-    price: 15.99,
-    image: "https://i.imgur.com/6YLHVBs.jpg",
-    rating: 4.7,
-    isVegetarian: true,
-    category: "classic"
-  },
-  {
-    id: 4,
-    name: "Kiki's Delivery Special",
-    description: "A delightful mix of ham, pineapple, bell peppers, and our special herb-infused tomato sauce.",
-    price: 17.99,
-    image: "https://i.imgur.com/BvytVvq.jpg", 
-    rating: 4.5,
-    category: "signature"
-  },
-  {
-    id: 5,
-    name: "Castle in the Sky Supreme",
-    description: "Pepperoni, Italian sausage, bell peppers, onions, olives, and mushrooms piled high.",
-    price: 19.99,
-    image: "https://i.imgur.com/hGFZFZA.jpg",
-    rating: 4.6,
-    category: "signature"
-  },
-  {
-    id: 6,
-    name: "Princess Mononoke Meat Lover's",
-    description: "Pepperoni, bacon, ham, Italian sausage, and ground beef with mozzarella and cheddar cheeses.",
-    price: 20.99,
-    image: "https://i.imgur.com/BivZoK7.jpg",
-    rating: 4.8,
-    category: "signature"
-  },
-  {
-    id: 7,
-    name: "Ponyo Seafood Delight",
-    description: "Shrimp, crab meat, clams, and mozzarella with a light garlic butter sauce and fresh herbs.",
-    price: 21.99,
-    image: "https://i.imgur.com/2GDQOFg.jpg",
-    rating: 4.7,
-    isNew: true,
-    category: "signature"
-  },
-  {
-    id: 8,
-    name: "Classic Cheese",
-    description: "Our signature tomato sauce topped with a generous layer of mozzarella cheese on a perfect crust.",
-    price: 14.99,
-    image: "https://i.imgur.com/sCRmHqz.jpg",
-    rating: 4.5,
-    isVegetarian: true,
-    category: "classic"
-  },
-  {
-    id: 9,
-    name: "Garden Vegetable",
-    description: "Fresh tomatoes, bell peppers, red onions, mushrooms, and black olives on a bed of mozzarella.",
-    price: 16.99,
-    image: "https://i.imgur.com/bxaA4SX.jpg",
-    rating: 4.6,
-    isVegetarian: true,
-    category: "classic"
-  }
-];
+import { Search } from 'lucide-react';
+import { usePizzas } from '@/hooks/use-pizzas';
 
 const Menu: React.FC = () => {
+  const { data: allPizzas = [], isLoading } = usePizzas();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   
   // Filter pizzas based on search term and active filter
   const filteredPizzas = allPizzas.filter(pizza => {
-    const matchesSearch = pizza.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          pizza.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = 
+      pizza.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      (pizza.description && pizza.description.toLowerCase().includes(searchTerm.toLowerCase()));
     
     if (activeFilter === 'all') return matchesSearch;
-    if (activeFilter === 'vegetarian') return matchesSearch && pizza.isVegetarian;
-    if (activeFilter === 'new') return matchesSearch && pizza.isNew;
-    if (activeFilter === 'signature') return matchesSearch && pizza.category === 'signature';
-    if (activeFilter === 'classic') return matchesSearch && pizza.category === 'classic';
+    
+    // Since we don't have these properties in the database yet, we'll skip filtering by them
+    // We could add these columns to the database in the future
+    // const isVegetarian = pizza.isVegetarian;
+    // const isNew = pizza.isNew;
+    // const category = pizza.category;
     
     return matchesSearch;
   });
   
   const filterOptions = [
     { id: 'all', label: 'All Pizzas' },
+    // We'll keep these filters for UI consistency, but they won't filter anything yet
     { id: 'vegetarian', label: 'Vegetarian' },
     { id: 'new', label: 'New Arrivals' },
     { id: 'signature', label: 'Signature' },
@@ -175,10 +89,25 @@ const Menu: React.FC = () => {
         {/* Pizza Grid */}
         <section className="py-12 bg-menu-texture">
           <div className="container mx-auto px-4">
-            {filteredPizzas.length > 0 ? (
+            {isLoading ? (
+              <div className="text-center py-20">
+                <p className="text-ghibli-slate">Loading pizzas...</p>
+              </div>
+            ) : filteredPizzas.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPizzas.map(pizza => (
-                  <PizzaCard key={pizza.id} {...pizza} />
+                  <PizzaCard 
+                    key={pizza.id}
+                    id={Number(pizza.id)}
+                    name={pizza.name}
+                    description={pizza.description || ''}
+                    price={pizza.price}
+                    image={pizza.image_url || 'https://i.imgur.com/sCRmHqz.jpg'} // Default image
+                    // These properties aren't in our database yet, so we'll default them
+                    rating={0}
+                    isNew={false}
+                    isVegetarian={false}
+                  />
                 ))}
               </div>
             ) : (
