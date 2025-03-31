@@ -44,7 +44,7 @@ const Index: React.FC = () => {
                     name={pizza.name}
                     description={pizza.description || ''}
                     price={pizza.price}
-                    image={pizza.image_url || 'https://i.imgur.com/sCRmHqz.jpg'} // Default image
+                    image={pizza.image_url || 'https://lh3.googleusercontent.com/p/AF1QipMhqWYem3UbV5k6CgDOM1nLBHKkjVOg9xRPEFzd=s1360-w1360-h1020'} // Default image
                     // These properties aren't in our database yet
                     rating={0}
                     isNew={false}
