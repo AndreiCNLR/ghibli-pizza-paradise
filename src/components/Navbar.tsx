@@ -1,12 +1,14 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Percent } from 'lucide-react';
 import AuthNavItems from './AuthNavItems';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -40,6 +42,17 @@ const Navbar: React.FC = () => {
           >
             Our Pizzas
           </Link>
+          {user && (
+            <Link 
+              to="/member-discounts" 
+              className={`font-medium hover:text-ghibli-green transition-colors flex items-center ${
+                isActive('/member-discounts') ? 'text-ghibli-green' : 'text-ghibli-forest'
+              }`}
+            >
+              <Percent className="h-4 w-4 mr-1" />
+              Member Discounts
+            </Link>
+          )}
           <Link 
             to="#" 
             className="ghibli-button"
@@ -88,6 +101,18 @@ const Navbar: React.FC = () => {
             >
               Our Pizzas
             </Link>
+            {user && (
+              <Link 
+                to="/member-discounts" 
+                className={`block py-2 font-medium hover:text-ghibli-green transition-colors flex items-center ${
+                  isActive('/member-discounts') ? 'text-ghibli-green' : 'text-ghibli-forest'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Percent className="h-4 w-4 mr-1" />
+                Member Discounts
+              </Link>
+            )}
             <Link 
               to="#" 
               className="block py-2 ghibli-button text-center"
