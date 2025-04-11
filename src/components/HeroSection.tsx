@@ -13,17 +13,17 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-4 py-20 md:py-32 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 md:pr-12 mb-10 md:mb-0 z-10">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ghibli-forest mb-6 leading-tight">
-            Magical Pizza from a Whimsical Kitchen
+            Pizza Magică dintr-o Bucătărie Fantastică
           </h1>
           <p className="text-lg md:text-xl text-ghibli-slate mb-8">
-            Experience hand-crafted pizzas inspired by Studio Ghibli's enchanting worlds. Each bite is an adventure of flavors that will transport you to a magical realm.
+            Experimentați pizzele noastre artizanale inspirate de lumile fermecate ale Studio Ghibli. Fiecare înghițitură este o aventură de arome care te va transporta într-un tărâm magic.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
             <Link to="/menu" className="ghibli-button text-center">
-              View Our Menu
+              Vezi Meniul Nostru
             </Link>
             <Link to="#" className="px-6 py-3 rounded-full border-2 border-ghibli-brown text-ghibli-brown font-medium hover:bg-ghibli-brown hover:text-white transition-colors text-center">
-              Order Online
+              Comandă Online
             </Link>
           </div>
         </div>
@@ -33,14 +33,14 @@ const HeroSection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-ghibli-forest/20 to-transparent z-10"></div>
             <img 
               src="https://lh3.googleusercontent.com/p/AF1QipMhqWYem3UbV5k6CgDOM1nLBHKkjVOg9xRPEFzd=s1360-w1360-h1020" 
-              alt="Ghibli-inspired pizza with magical toppings" 
+              alt="Pizza inspirată de Ghibli cu garnituri magice" 
               className="w-full h-full object-cover object-center"
             />
           </div>
           
           {/* Floating badge */}
           <div className="absolute -right-4 md:right-8 top-10 bg-white rounded-full py-2 px-4 ghibli-shadow animate-bounce-slight">
-            <span className="text-ghibli-forest font-bold">New! Limited Edition</span>
+            <span className="text-ghibli-forest font-bold">Nou! Ediție Limitată</span>
           </div>
           
           {/* Flour dust particles */}
