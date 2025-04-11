@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-4 py-20 md:py-32 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2 md:pr-12 mb-10 md:mb-0 z-10">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ghibli-forest mb-6 leading-tight">
-            Pizza Magică dintr-o Bucătărie Fantastică
+        Bautura Magică dintr-o Bucătărie Fantastică
           </h1>
           <p className="text-lg md:text-xl text-ghibli-slate mb-8">
             Experimentați pizzele noastre artizanale inspirate de lumile fermecate ale Studio Ghibli. Fiecare înghițitură este o aventură de arome care te va transporta într-un tărâm magic.
