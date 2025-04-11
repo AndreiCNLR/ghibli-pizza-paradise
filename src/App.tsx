@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import DiscountedMenu from "./pages/DiscountedMenu";
+import AlternateLanding from "./pages/AlternateLanding";
 import { Helmet } from "react-helmet-async";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -27,6 +28,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/variant" element={<AlternateLanding />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/profile" element={<Profile />} />
