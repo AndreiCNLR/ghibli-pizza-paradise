@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Percent } from 'lucide-react';
 import { usePizzas } from '@/hooks/use-pizzas';
 import { useAuth } from '@/contexts/AuthContext';
+import { Helmet } from "react-helmet-async";
 
 const Index: React.FC = () => {
   const { data: allPizzas = [], isLoading } = usePizzas();
@@ -19,6 +20,12 @@ const Index: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Ghibli Pizza Paradise - Magical Pizza Delivery</title>
+        <meta name="description" content="Ghibli Pizza Paradise offers magical, Studio Ghibli-inspired pizza for delivery and pickup. Order online for a taste of whimsical, delicious pizza." />
+        <link rel="canonical" href="/" />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">

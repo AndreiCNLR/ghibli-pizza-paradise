@@ -1,3 +1,9 @@
+
+# Allow all search engine robots to index the site
+User-agent: *
+Allow: /
+
+# Specific rules for major search engines
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +16,8 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
-Allow: /
+# Allow access to all parts of the site
+Disallow:
+
+# Sitemap location (update when you have a sitemap)
+# Sitemap: https://yourdomain.com/sitemap.xml

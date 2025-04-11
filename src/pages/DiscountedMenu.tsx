@@ -8,6 +8,7 @@ import PizzaGrid from '@/components/menu/DiscountedPizzaGrid';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { Helmet } from "react-helmet-async";
 
 const DiscountedMenu: React.FC = () => {
   const { data: allPizzas = [], isLoading } = usePizzas();
@@ -32,6 +33,12 @@ const DiscountedMenu: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Member Discounts | Ghibli Pizza Paradise</title>
+        <meta name="description" content="Exclusive member discounts - get 20% off all our magical pizzas when you sign in!" />
+        <link rel="canonical" href="/member-discounts" />
+      </Helmet>
+      
       <Navbar />
       
       <main className="flex-grow">
